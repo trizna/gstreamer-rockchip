@@ -133,12 +133,15 @@ gst_mpp_h264_enc_set_format (GstVideoEncoder * encoder,
   codec_cfg.coding = MPP_VIDEO_CodingAVC;
   codec_cfg.h264.change = MPP_ENC_H264_CFG_CHANGE_PROFILE |
       MPP_ENC_H264_CFG_CHANGE_ENTROPY |
-      MPP_ENC_H264_CFG_CHANGE_TRANS_8x8 | MPP_ENC_H264_CFG_CHANGE_QP_LIMIT;
+      MPP_ENC_H264_CFG_CHANGE_TRANS_8x8 | MPP_ENC_H264_CFG_CHANGE_QP_LIMIT
+      | MPP_ENC_H264_CFG_CHANGE_SLICE_MODE;
   codec_cfg.h264.profile = 100;
   codec_cfg.h264.level = 40;
   codec_cfg.h264.entropy_coding_mode = 1;
   codec_cfg.h264.cabac_init_idc = 0;
   codec_cfg.h264.transform8x8_mode = 1;
+  codec_cfg.h264.slice_mode = 2;
+  codec_cfg.h264.slice_arg = 680;
 
   if (mpp_video_enc->mpi->control (mpp_video_enc->mpp_ctx,
           MPP_ENC_SET_CODEC_CFG, &codec_cfg)) {
